@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+        
+<h2>Login Form</h2>
+
+<form>
+    <label><b>Username</b></label><br><br>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+    <br><br>
+    <label><b>Password</b></label><br><br>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+    <br><br>
+    
+    <input type="checkbox" checked="checked"> Remember me
+    <br><br>
+    <a href="dashboard"><button style="float:left" class="button button1">Login</button></a>
+    <a href="signup"><button style="float:right" class="button button1">signup</button></a> 
+
+</form>
+</div>
+
+<footer>Copyright &copy; yummy</footer>
+
+
+</body>
+</html>
+
+{% endblock %}
