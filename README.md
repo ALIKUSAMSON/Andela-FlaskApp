@@ -1,6 +1,5 @@
 # Andela-Corhort-4
 
-
 The Yummy Recipes App 
 ##Travis
 [![Build Status](https://travis-ci.org/ALIKUSAMSON/Andela-Corhort-4.svg?branch=master)](https://travis-ci.org/ALIKUSAMSON/Andela-Corhort-4)
