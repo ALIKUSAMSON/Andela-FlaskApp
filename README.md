@@ -1,5 +1,7 @@
 # Andela-Corhort-4
-The Yummy Recipes App helps to 
+[![Build Status](https://travis-ci.org/ALIKUSAMSON/Andela-Corhort-4.svg?branch=master)](https://travis-ci.org/ALIKUSAMSON/Andela-Corhort-4)
+
+The Yummy Recipes App 
 
 ## Prerequisites
 Check the requirements.txt file
