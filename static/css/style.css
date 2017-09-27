@@ -1,5 +1,5 @@
 
-input[type=text], input[type=password] {
+input[type=email], input[type=password],input[type=text],textarea[type=text] {
     width: 100%;
     padding: 12px 12px;
     margin: 8px 0;
@@ -8,6 +8,7 @@ input[type=text], input[type=password] {
     border-radius: 15px 50px 30px 5px;
     box-sizing: border-box;
 }
+
 div.container {
     width: 50%;
     border:1px solid none;
@@ -109,4 +110,14 @@ img {
     cursor: pointer;
     width: 20%;
     border-radius: 9px
+}
+.button7 {
+    background-color:darkcyan;
+    color: white;
+    padding: 7px 30px;
+    margin: 6px 2px;
+    border: none;
+    cursor: pointer;
+    width: 5%;
+    border-radius: 12px
 }

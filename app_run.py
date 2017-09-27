@@ -1,22 +1,103 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request, sessions, flash
+import models
+import yummymodel
 
-app=Flask(__name__)
+app = Flask(__name__)
+
 
 @app.route("/")
 def home():
     return render_template("home.html")
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        if email in models.users:
+            loginuser = models.YummyRecipeApp(email, password)
+            if loginuser.login() == 'Logged in':
+                # models.logged_in[0] is the identifier of the logged in user
+                user_DB = yummymodel.User(models.logged_in[0]).view_user_DB(models.logged_in[0])
+                # user_DB returns the DB of the logged in user
+                return render_template("dashboard.html", user_DB=user_DB)
+            else:
+                flash('Password Incorrect')
+                return render_template("login.html")
+        else:
+            flash('Unknown user')
+            return render_template("signup.html")
     return render_template("login.html")
 
-@app.route("/signup")
+
+@app.route("/signup", methods=['GET', "POST"])
 def signup():
-    return render_template("signup.html")
+    """method implementing signup"""
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        createuser = models.YummyRecipeApp(email, password, name, )
+        createuser.signup()  # creates users with above credentials
+        return render_template('login.html')
+    else:
+        return render_template("signup.html")
+
+@app.route('/logout')
+def logout():
+    """method implementing logout"""
+    models.logged_in[0] = None  # replaces logged in user with None
+    return redirect(url_for('login'))
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    """method implementing view dashboard feature"""
+
+    if models.logged_in[0]:
+        user_DB = yummymodel.User(models.logged_in[0]).view_user_DB(models.logged_in[0])
+        # user_bucketlists returns the bucketlist of the logged in user
+        return render_template("dashboard.html", user_DB=user_DB)
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/create', methods=['GET','POST'])
+def createRecipe():
+    if models.logged_in[0]:
+        if request.method == 'POST':
+            recipe = request.form['recipe']
+            create_DB = yummymodel.User(models.logged_in[0])
+            create_DB.create_user_DB(recipe)
+            return redirect(url_for('create'))
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/yummylists/<int:RecipeID>/delete', methods=['POST', 'GET'])
+def deleteRecipe(RecipeID):
+    """method implementing delete bucketlist feature"""
+    if models.logged_in[0]:
+        if request.method == 'POST':
+            name = request.form['name']
+            user_DB = yummymodel.User(models.logged_in[0]).delete_DB(yummymodel.current_user_DB[RecipeID])
+            return redirect(url_for('dashboard'))
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/yummylists/<int:RecipeID>/update', methods=['POST', 'GET'])
+def update_DB(RecipeID):
+    """method implementing update bucketlist feature"""
+    if models.logged_in[0]:
+        if request.method == 'POST':
+            new_recipe = request.form['new_recipe']
+            user_DB = yummymodel.User(models.logged_in[0]).update_DB(yummymodel.current_user_DB[recipeID], new_recipe)
+            return redirect(url_for('dashboard'))
+        elif request.method == 'GET':
+            return render_template('update.html')
+    else:
+        return redirect(url_for('login'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

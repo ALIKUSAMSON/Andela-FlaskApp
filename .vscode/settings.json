@@ -1,0 +1,10 @@
+{
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        ".\\Andela-FlaskApp",
+        "-p",
+        "*_test.py"
+    ],
+    "python.unitTest.unittestEnabled": true
+}

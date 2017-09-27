@@ -4,19 +4,20 @@
 
 <div class="container">   
 <h2>Signup Form</h2>
-
+<form action="{{url_for('signup')}}" method="POST">
     <label><b>Username</b></label>
   <input type="text" placeholder="Enter username" name="name" required>
 
     <label><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="email" placeholder="Enter Email" name="email" required>
 
     <label><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
 
     <input type="checkbox" checked="checked"> Agree with terms and conditions
     <br><br>
-      <a href="login"><button style="float:left" class="button button1">signup</button></a> 
+    <button style="float:left" class="button button1"> <input type="submit" value="Signup"></button> 
+  </form>
     
 </div>
 

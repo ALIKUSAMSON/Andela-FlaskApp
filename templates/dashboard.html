@@ -1,24 +1,26 @@
 
 {% extends 'base.html' %}
 {% block content %}
-      
-      <button class="button button6"> Create Recipe.</button>
-    <div>
-       <h3>How to prepare Coffee.</h3>
-      <button class="button button5"> Update.</button>
-        <button class="button button5"> Delete.</button>  
-        <ol>
-          <li>Add coffee and  hotwater</li><br>
-          <li>Stir the mix for 5 seconds</li><br>
-          <li>Finished making coffee</li><br>
-          <li>Yummy.... tasty coffee</li><br>
-        </ol>
-      </div>
 
-      <div>
+      <a href="create"><button type="submit" class="button button6" >Create Recipe</button></a>
+
+      
         <h3>How to Milk coffe Tea.</h3>
-        <button class="button button5"> Update.</button>
-        <button class="button button5"> Delete.</button> 
+        {% for Yummylist in user_DB %}
+        <tr>
+           <td><li><a href="/yummylists/{{user_DB.index(yummylist)}}">{{Yummylist}}</a></li></td>
+           <td>
+               <form method="POST" action="/yummylists/{{user_DB.index(yummylist)}}/delete" onsubmit="return confirm('Are you sure you want to delete?')">
+                   <input type="hidden" name="name" value="name" required>
+                   <button type="submit" class="button button5">Delete</button>
+               </form></td>
+            <td>
+               <form method="GET" action="/yummylists/{{user_DB.index(yummylist)}}/update">
+                <button type="submit" class="button button5">Update</button>  
+              </form></td>
+            </tr>
+        {% endfor %}
+      
         <ol>
             <li>Add coffee and  hotwater</li><br>
             <li>Gently pour milk into the mix</li><br>
@@ -29,5 +31,3 @@
         </div>
 
 {% endblock %}
-
-
