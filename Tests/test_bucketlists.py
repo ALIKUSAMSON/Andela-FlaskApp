@@ -13,12 +13,10 @@ class YummyModelTest(unittest.TestCase):
 
     def test_bucketlist_is_added_to_bucketlists_dictionary_and_can_be_deleted(self): # test ensures that bucketlist is added
         models.logged_in = ['dengima@gmail.com']
-        self.assertEqual({'dengima@gmail.com': ['dengima', 'dengima']},
-                         self.user.create_user_DB("dengima@gmail.com"))
-        self.assertEqual(
-            {'dengima@gmail.com': ['name', 'password']},
-            self.user.delete_DB('dengima@gmail.com'))
+        self.assertEqual({'dengima@gmail.com': {'avs':{},'deng':['dengima']}},self.user.create_user_DB("avs"))
+        self.assertEqual({'dengima@gmail.com':{'deng': ['dengima']}},self.user.delete_DB('avs'))
 
+     
     def test_return_false_if_bucketlist_to_be_added_is_empty(self):
         self.assertEqual(False, self.user.create_user_DB(''))
     #

@@ -11,7 +11,7 @@
            <td><li><a href="/yummylists/{{user_DB.index(yummylist)}}">{{Yummylist}}</a></li></td>
            <td>
                <form method="POST" action="/yummylists/{{user_DB.index(yummylist)}}/delete" onsubmit="return confirm('Are you sure you want to delete?')">
-                   <input type="hidden" name="name" value="name" required>
+                <textarea type="text" name="recipe" placeholder="Recipe"></textarea>
                    <button type="submit" class="button button5">Delete</button>
                </form></td>
             <td>

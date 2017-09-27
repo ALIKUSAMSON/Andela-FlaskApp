@@ -10,7 +10,7 @@ class User(object):
     def __init__(self, email):  # email belongs to the logged in user
         self.email = email
 
-    def create_user_DB(self, recipe, procedure):
+    def create_user_DB(self, recipe):
         """Implements create user bucketlist feature"""
         if recipe and recipe not in yummylists:
             if self.email in yummylists:
@@ -26,15 +26,15 @@ class User(object):
         else:
             return False
 
-    def delete_yummylist(self, name):
+    def delete_DB(self, recipe):
         """Implements delete feature"""
-        if name:  # makes sure the name field is not empty and
-            del yummylists[models.logged_in[0]][name]
+        if recipe:  # makes sure the name field is not empty and
+            del yummylists[models.logged_in[0]][recipe]
             return yummylists
         else:
             return 'Cannot delete a buckelist with no name'
 
-    def update_yummylist(self, recipe, new_recipe):
+    def update_DB(self, recipe, new_recipe):
         """Implements the update bucketlist feature"""
 
         if recipe and new_recipe:  # makes sure the name field is not empty and
@@ -51,10 +51,10 @@ class User(object):
                 user_DB.append(yummylist)
                 global current_user_DB  # to ensure that current_user_bucketlists can be manipulated in the scope
                 current_user_DB = user_DB
-        return user_DB
-        '''else:
+                return user_DB
+        else:
             yummylists[email] = {}
             current_user_DB = user_DB
             # global current_user_bucketlists
             current_user_DB = user_DB
-            return user_DB'''
+            return user_DB
