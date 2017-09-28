@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+<form role="form" action="/createrecipe" method="POST">
+    <label><b>Recipe Name</b></label><br>
+      <li></li><textarea type="text" name="recipe" placeholder="Recipe"></textarea></li>
+    <button class="button button7" type="submit">Create</button>
+</form>
+</div>
+
+{% endblock %}
+    
+
+        
