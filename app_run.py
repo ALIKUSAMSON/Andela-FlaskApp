@@ -44,13 +44,13 @@ def signup():
 
 @app.route('/logout')
 def logout():
-    """method implementing logout"""
+
     models.logged_in[0] = None  # replaces logged in user with None
     return redirect(url_for('login'))
 
 @app.route("/dashboard",methods=["GET",'POST'])
 def dashboard():
-    """method implementing view dashboard feature"""
+
     if models.logged_in[0]:
         user_DB = yummymodel.User(models.logged_in[0]).view_user_DB(models.logged_in[0])
         # user_bucketlists returns the bucketlist of the logged in user
@@ -76,7 +76,6 @@ def createRecipe():
 
 @app.route('/yummylists/<int:RecipeID>/delete', methods=['POST', 'GET'])
 def deleteRecipe(RecipeID):
-    """method implementing delete bucketlist feature"""
     if models.logged_in[0]:
         if request.method == 'POST':
             recipe = request.form['recipe']
@@ -88,7 +87,6 @@ def deleteRecipe(RecipeID):
 
 @app.route('/yummylists/<int:RecipeID>/update', methods=['POST', 'GET'])
 def update_DB(RecipeID):
-    """method implementing update bucketlist feature"""
     if models.logged_in[0]:
         if request.method == 'POST':
             new_recipe = request.form['new_recipe']
@@ -113,6 +111,8 @@ def view_items_in_yummylist(RecipeID):
             return render_template("dashboard.html",user_DB=user_DB)
     else:
         return render_template('login')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
