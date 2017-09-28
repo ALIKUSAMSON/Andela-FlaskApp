@@ -3,8 +3,8 @@ logged_in = [None] # list that holds the current_user, contains None if no curre
 
 class YummyRecipeApp(object):
     """Intializes an object of BuckListApp. email and password are only compulsory arguments"""
-    def __init__(self, email,password,username):
-        self.username = username
+    def __init__(self,email,password,name=None):
+        self.name = name
         self.email = email
         self.password = password # password, password must equal to confirm password inorder to save
 
@@ -15,7 +15,7 @@ class YummyRecipeApp(object):
                 return 'User already exists'
             else:
                 if self.password != None: # password, password must equal to confirm password inorder to save
-                    users[self.email] = [self.username, self.password]
+                    users[self.email] = [self.name, self.password]
                     return users
                 else:
                     return 'Input password'

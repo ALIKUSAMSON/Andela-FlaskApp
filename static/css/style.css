@@ -1,5 +1,5 @@
 
-input[type=email], input[type=password],input[type=text],textarea[type=text] {
+input[type=email], input[type=password],input[type=text] {
     width: 100%;
     padding: 12px 12px;
     margin: 8px 0;
@@ -7,6 +7,17 @@ input[type=email], input[type=password],input[type=text],textarea[type=text] {
     border: 1px solid #ccc;
     border-radius: 15px 50px 30px 5px;
     box-sizing: border-box;
+}
+textarea[type=text]{
+    width: 350px;
+    height: 200px;
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 15px 50px 30px 5px;
+  
 }
 
 div.container {
@@ -94,11 +105,11 @@ img {
 .button5 {
     background-color:lightseagreen;
     color: white;
-    padding:10px 24px;
+    padding:14px 24px;
     margin: 4px 2px;
     border: none;
     cursor: pointer;
-    width: 10%;
+    width: 7%;
     border-radius: 12px;
 }
 .button6 {
@@ -114,10 +125,10 @@ img {
 .button7 {
     background-color:darkcyan;
     color: white;
-    padding: 7px 30px;
+    padding: 10px 24px;
     margin: 6px 2px;
     border: none;
     cursor: pointer;
-    width: 5%;
+    width: 12%;
     border-radius: 12px
 }

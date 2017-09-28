@@ -10,10 +10,10 @@
 
 <form action="{{url_for('login')}}" method="POST">
     <label><b>Email</b></label><br><br>
-    <input type="email" placeholder="Enter Username" name="email" value="{{request.form.email}}" required>
+    <input type="email" placeholder="Enter Username" name="email" required>
     <br><br>
     <label><b>Password</b></label><br><br>
-    <input type="password" placeholder="Enter Password" name="password" value="{{request.form.password}}" required>
+    <input type="password" placeholder="Enter Password" name="password" required>
     <br><br>
     
     <input type="checkbox" checked="checked"> Remember me

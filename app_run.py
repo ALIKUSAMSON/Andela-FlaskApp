@@ -4,7 +4,6 @@ import yummymodel
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -49,10 +48,9 @@ def logout():
     models.logged_in[0] = None  # replaces logged in user with None
     return redirect(url_for('login'))
 
-@app.route("/dashboard")
+@app.route("/dashboard",methods=["GET",'POST'])
 def dashboard():
     """method implementing view dashboard feature"""
-
     if models.logged_in[0]:
         user_DB = yummymodel.User(models.logged_in[0]).view_user_DB(models.logged_in[0])
         # user_bucketlists returns the bucketlist of the logged in user
@@ -60,25 +58,28 @@ def dashboard():
     else:
         return redirect(url_for('login'))
 
+@app.route("/create")
+def create_page():
+    return render_template("create.html")
 
-@app.route('/create', methods=['GET','POST'])
+@app.route("/createrecipe",methods=['POST','GET'])
 def createRecipe():
     if models.logged_in[0]:
         if request.method == 'POST':
             recipe = request.form['recipe']
             create_DB = yummymodel.User(models.logged_in[0])
             create_DB.create_user_DB(recipe)
-            return redirect(url_for('create'))
+            return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('login'))
-
+    return render_template('create.html') 
 
 @app.route('/yummylists/<int:RecipeID>/delete', methods=['POST', 'GET'])
 def deleteRecipe(RecipeID):
     """method implementing delete bucketlist feature"""
     if models.logged_in[0]:
         if request.method == 'POST':
-            name = request.form['name']
+            recipe = request.form['recipe']
             user_DB = yummymodel.User(models.logged_in[0]).delete_DB(yummymodel.current_user_DB[RecipeID])
             return redirect(url_for('dashboard'))
     else:
@@ -91,13 +92,27 @@ def update_DB(RecipeID):
     if models.logged_in[0]:
         if request.method == 'POST':
             new_recipe = request.form['new_recipe']
-            user_DB = yummymodel.User(models.logged_in[0]).update_DB(yummymodel.current_user_DB[recipeID], new_recipe)
+            user_DB = yummymodel.User(models.logged_in[0]).update_DB(yummymodel.current_user_DB[RecipeID], new_recipe)
             return redirect(url_for('dashboard'))
         elif request.method == 'GET':
             return render_template('update.html')
     else:
         return redirect(url_for('login'))
 
+@app.route("/update")
+def update():
+    return render_template("update.html")
+
+@app.route('/yummylists/<int:RecipeID>', methods=['GET', 'POST'])
+def view_items_in_yummylist(RecipeID):
+    if models.logged_in[0]:
+        if request.method =='GET':
+            user_DB = yummymodel.User(models.logged_in[0]).view_user_DB(models.logged_in[0])
+            yummylist = yummymodel.current_user_DB[RecipeID]
+        else:
+            return render_template("dashboard.html",user_DB=user_DB)
+    else:
+        return render_template('login')
 
 if __name__ == '__main__':
     app.run(debug=True)
