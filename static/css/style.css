@@ -111,6 +111,7 @@ img {
     cursor: pointer;
     width: 7%;
     border-radius: 12px;
+    display: inline-block;
 }
 .button6 {
     background-color:brown;

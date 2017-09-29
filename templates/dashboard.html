@@ -18,14 +18,13 @@
         
             <form method="POST" action="/yummylists/{{user_DB.index(yummylist)}}/delete" 
             onsubmit="return confirm('Are you sure you want to delete?')">
-                <button type="submit" class="button button5">Delete</button>
+              <button type="submit" class="button button5">Delete</button>
             </form>
             <form method="GET" action="/yummylists/{{user_DB.index(yummylist)}}/update">
-              <button type="submit" class="button button5">Update</button>  
+              <button type="submit" class="button button5">Update</button> 
             </form>
-
+            
      {% endfor %}
-
 {% endblock %}
      
   
